@@ -26,7 +26,7 @@ namespace TestProject2.Controllers
             return "widget-" + widget.ToString();
         }
 
-        [HttpGet, Route("status/{status:alpha=pending}/{id:int-5}")]
+        [HttpGet, Route("status/{status:alpha=pending}/{id:int=5}")]
         public string GetProductsWithStatus(string status, int id)
         {
             return String.IsNullOrEmpty(status) ? "NULL" : status;
