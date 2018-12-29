@@ -4,6 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
+using System.Web.Http.ModelBinding;
+using TestProject2.Models;
 
 namespace TestProject2.Controllers
 {
@@ -36,6 +39,28 @@ namespace TestProject2.Controllers
         {
         }
 
+        // Throwing a base64 unknown error.
+        // example base64 bindary data, converst to a sample json object:
+        // ew0KICAibnVtYmVyIjogMTIzLA0KICAib2JqZWN0Ijogew0KICAgICJhIjogImIiLA0KICAgICJjIjogImQiLA0KICAgICJlIjogImYiDQogIH0sDQogICJzdHJpbmciOiAiSGVsbG8gV29ybGQiDQp9
+        //[HttpGet, Route("binary/{array:base64:maxlength(512)}")]
+        //public string GetBinaryArray([ModelBinder(typeof(Base64ParameterModelBinder))]byte[] array)
+        //{
+        //    return System.Text.Encoding.UTF8.GetString(array);
+        //}
+
+        [HttpGet, Route("complex")]
+        public IHttpActionResult ComplexTest([FromUri]ComplexTypeDto obj)
+        {
+            return Json(obj);
+        }
+
+        [HttpPut, Route("bodytest")]
+        public string BodyTest([FromBody] string value)
+        {
+            return value;
+        }
+
+
         [HttpGet, Route("dates/{*myDate:datetime}")]
         public string GetDate(DateTime myDate)
         {
@@ -44,6 +69,11 @@ namespace TestProject2.Controllers
 
         [HttpGet, Route("segments/{*array:maxlength(256)}")]
         public string[] GetSegements(string[] array)
+        {
+            return array;
+        }
+        [HttpGet, Route("segments/{*array:maxlength(256)}")]
+        public string[] GetSegments([ModelBinder(typeof(StringArrayWildcardBinder))] string[] array)
         {
             return array;
         }
