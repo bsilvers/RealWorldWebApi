@@ -35,5 +35,17 @@ namespace TestProject2.Controllers
         public void Delete(int id)
         {
         }
+
+        [HttpGet, Route("dates/{*myDate:datetime}")]
+        public string GetDate(DateTime myDate)
+        {
+            return myDate.ToLongDateString();
+        }
+
+        [HttpGet, Route("segments/{*array:maxlength(256)}")]
+        public string[] GetSegements(string[] array)
+        {
+            return array;
+        }
     }
 }
