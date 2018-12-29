@@ -21,9 +21,9 @@ namespace TestProject2.Controllers
             Motor
         };
         [HttpGet, Route("widget/{widget:enum(TestProject2.Controllers.ProductsController+Widgets)}")]
-        public string GetProductsWithWidget(string widget)
+        public string GetProductsWithWidget(Widgets widget)
         {
-            return "widget-" + widget;
+            return "widget-" + widget.ToString();
         }
 
 
