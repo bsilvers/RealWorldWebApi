@@ -26,14 +26,20 @@ namespace TestProject2.Controllers
             return "widget-" + widget.ToString();
         }
 
+        [HttpGet, Route("status/{status:alpha=pending}/{id:int-5}")]
+        public string GetProductsWithStatus(string status, int id)
+        {
+            return String.IsNullOrEmpty(status) ? "NULL" : status;
+        }
 
-        [HttpGet, Route("")]
+        [Route("")]
+        [AcceptVerbs("GET", "VIEW")]
         // GET: api/Products
         public IEnumerable<string> GetAllProducts()
         {
             return new string[] { "product1", "product2" };
         }
-        [HttpGet, Route("{id:int:range(1000,3000)}")]
+        [HttpGet, Route("{id:int:range(1000,3000)}", Name ="GetById")]
         // GET: api/Products/5
         public string GetProduct(int id)
         {
@@ -46,10 +52,15 @@ namespace TestProject2.Controllers
             return "product-orders-" + custid;
         }
 
-        [HttpPost, Route("")]
+        [HttpPost, Route("{prodId:int:range(1000,3000)}")]
         // POST: api/Products
-        public void CreateProduct([FromBody]string value)
+        public HttpResponseMessage CreateProduct([FromUri]int prodId)
         {
+            var response = Request.CreateResponse(HttpStatusCode.Created);
+
+            string uri = Url.Link("GetById", new { id = prodId });
+            response.Headers.Location = new Uri(uri);
+            return response;
         }
         [HttpPut, Route("{id:int:range(1000,3000)}")]
         // PUT: api/Products/5
