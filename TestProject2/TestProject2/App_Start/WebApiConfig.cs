@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Routing;
+using DeLoachAero.WebApi;
 
 namespace TestProject2
 {
@@ -12,7 +14,12 @@ namespace TestProject2
             // Web API configuration and services
 
             // Web API routes
-            config.MapHttpAttributeRoutes();
+            // config.MapHttpAttributeRoutes();
+
+            var constraintResolver = new DefaultInlineConstraintResolver();
+            constraintResolver.ConstraintMap.Add("enum", typeof(EnumerationConstraint));
+            config.MapHttpAttributeRoutes(constraintResolver);
+
            // config.Routes.MapHttpRoute(
            //    name: "ProdApi",
            //    routeTemplate: "api/prod/{id}",
