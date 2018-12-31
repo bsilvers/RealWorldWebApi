@@ -12,8 +12,9 @@ namespace TestProject5.Controllers
     [RouteTimerFilter("GetAllValues")]
     public class ValuesController : ApiController
     {
-        [HttpGet, Route("")]
         // GET: api/Values
+        [HttpGet, Route("")]
+        [ClientCacheControlFilter(ClientCacheControl.Private, 10)]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
