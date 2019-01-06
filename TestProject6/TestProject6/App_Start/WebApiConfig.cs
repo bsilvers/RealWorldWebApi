@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using TestProject6.AuthFilters;
+using TestProject6.Handlers;
 
 namespace TestProject6
 {
@@ -13,10 +14,11 @@ namespace TestProject6
             // Web API configuration and services
 
             config.SuppressHostPrincipal();
-
+            config.MessageHandlers.Add(new ForwardedHeadersHandler());
             config.Filters.Add(new BasicAuthFilterAttribute());
             config.Filters.Add(new JwtAuthenticationFilterAttribute());
-
+            config.Filters.Add(new RequireHttpsAttribute());
+            config.Filters.Add(new RequireClaimAttribute());
 
             config.Filters.Add(new AuthorizeAttribute()); // makes every method to have authorize
 

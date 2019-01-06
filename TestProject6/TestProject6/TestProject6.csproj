@@ -111,10 +111,13 @@
     <Compile Include="AuthFilters\AuthenticationFailureResult.cs" />
     <Compile Include="AuthFilters\BasicAuthFilter.cs" />
     <Compile Include="AuthFilters\JwtAuthenticationFilter.cs" />
+    <Compile Include="AuthFilters\RequireClaim.cs" />
+    <Compile Include="AuthFilters\RequireHttpsFilter.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\ForwardedHeadersHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

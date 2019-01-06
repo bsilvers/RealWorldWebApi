@@ -9,10 +9,11 @@ using TestProject6.AuthFilters;
 namespace TestProject6.Controllers
 {
     [RoutePrefix("values")]
+    [RequireClaim("MyCustomClaim", IncludeMissingInResponse = true)]
     public class ValuesController : ApiController
     {
         [Route("")]
-        //[Authorize]
+        [Authorize]
        // [AllowAnonymous]
         public IEnumerable<string> Get()
         {
