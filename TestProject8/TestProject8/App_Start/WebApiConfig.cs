@@ -14,6 +14,10 @@ namespace TestProject8
         {
             // Web API configuration and services
             config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger());
+            //config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+
+            // RFC 7807 global handler and base URI for exception types
+
 
             config.Filters.Add(new NotImplementedExceptionFilter());
             // Web API routes
